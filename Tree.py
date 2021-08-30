@@ -1,4 +1,5 @@
 from data import*
+import time
 
 
 class TreeNode:
@@ -16,7 +17,20 @@ class TreeNode:
         nodes = [self]
         while len(nodes) > 0:
             current_node = nodes.pop()
-            print(current_node.value)
+            if current_node.value == self.value:
+                pass 
+            else:
+                current_book_title = current_node.value[0].title()
+                current_book_author = current_node.value[1][0].title()
+                current_book_price = current_node.value[1][1]
+                print("\n")
+                print(current_book_title + ":")
+                print("Author: " + str(current_book_author))
+                print("Estimated Price: " + "$" + str(current_book_price) + " CAD")
+                print("-"*23)
+                time.sleep(0.8)
+                
+            
             nodes += current_node.children
 
 

@@ -3,3 +3,4 @@ com_sci = {'Code: The Hidden Language of Computer Hardware and Software': ['Char
 physics = {'Ignition! An Informal History of Liquid Rocket Propellants':['John Drury Clark', 30.64], 'Feynman\'s Tips on Physics': ['Richard Feynman', 20], 'Six Not-So-Easy Pieces':['Richard Feynman', 21]}
 
 
+dictionaries = [math, com_sci, physics]

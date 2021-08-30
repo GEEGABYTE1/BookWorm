@@ -34,7 +34,9 @@ class Running:
                     self.error()
                 else:
                     returned_genre = self.book_database.retrieve(prompted_genre)
-                    print(returned_genre)
+                    print("-"*23)
+                    time.sleep(0.8)
+                    returned_genre.traverse()
                     
                 
     

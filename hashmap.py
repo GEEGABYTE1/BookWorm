@@ -39,7 +39,7 @@ class HashMap:
                     return 
 
     def retrieve(self, key):
-        array_index = self.compressor(self.hash(key, value))
+        array_index = self.compressor(self.hash(key))
         current_array_value = self.array[array_index]
         if current_array_value == None:
             return None 

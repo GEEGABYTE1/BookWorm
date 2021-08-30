@@ -79,10 +79,10 @@ class Running:
 
 
 
-
             elif prompt == "/search_author":
                 prompted_author = str(input("Please enter a name of an author you would like to search: "))
                 prompted_author = prompted_author.title()
+                prompted_author = prompted_author.strip(" ")
     
     def genre_title(self):
         updated_dicts = {}

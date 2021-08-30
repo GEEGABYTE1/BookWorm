@@ -1,6 +1,7 @@
 from Tree import*
 import time
 from hashmap import HashMap
+from data import dictionaries
 
 class Running:
     book_database = HashMap(1000)
@@ -37,8 +38,20 @@ class Running:
                     print("-"*23)
                     time.sleep(0.8)
                     returned_genre.traverse()
-                    
+
+            elif prompt == "/search_title":
+                prompted_title = str(input("Please enter a title of a book you would like to search for: "))
+                prompted_title = prompted_title.title()
+
+
                 
+
+            
+            elif prompt == "/search_author":
+                prompted_author = str(input("Please enter a name of an author you would like to search: "))
+                prompted_author = prompted_author.title()
+
+                          
     
     def homepage(self):
         print("-"*49)

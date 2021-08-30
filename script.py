@@ -1,7 +1,13 @@
 from Tree import*
 import time
+from hashmap import HashMap
 
 class Running:
+    book_database = HashMap(1000)
+    book_database.setter("Math", math_tree)
+    book_database.setter("Computer Science", com_sci_tree)
+    book_database.setter("Physics", physics_tree)
+    book_choices = ["Math", "Computer Science", "Physics"]
 
     def running(self):
         self.homepage()
@@ -17,7 +23,20 @@ class Running:
         while True:
             print("\n")
             print("Please type in a command:")
+            time.sleep(1.1)
+            print("If you don't know the commands, please refer to the README file within the project directory")
             prompt = str(input(":"))
+
+            if prompt == "/view_genre":
+                prompted_genre = input("What genre of books would you like to view: ")
+                prompted_genre = prompted_genre.title()
+                if not prompted_genre in self.book_choices:
+                    self.error()
+                else:
+                    returned_genre = self.book_database.retrieve(prompted_genre)
+                    print(returned_genre)
+                    
+                
     
     def homepage(self):
         print("-"*49)
@@ -27,6 +46,14 @@ class Running:
         print("*"  + "\t" +  "\t" + "\t" +  "\t" +  "\t" +  "\t" + "*" + "\n")
         print("*"  + "\t" +  "\t" + "\t" +  "\t" +  "\t" +  "\t" + "*" + "\n")
         print("-"*49)
+
+    def error(self):
+        print("Oops, that genre does not seem to be in our program yet!")
+        time.sleep(1)
+        print("Here are our current choices: ")
+        for genre in self.book_choices:
+            print(genre)
+
        
 
 

@@ -42,17 +42,28 @@ class Running:
             elif prompt == "/search_title":
                 prompted_title = str(input("Please enter a title of a book you would like to search for: "))
                 prompted_title = prompted_title.title()
-
-
-                
-
+                formatted_dictionary = self.genre_title()
             
             elif prompt == "/search_author":
                 prompted_author = str(input("Please enter a name of an author you would like to search: "))
                 prompted_author = prompted_author.title()
-
-                          
     
+    def genre_title(self):
+        updated_dicts = {}
+        counter = 0
+        for genre in self.book_choices:
+            updated_dicts[genre] = []
+        
+        for dictionary in dictionaries:
+            for title in dictionary.keys():
+                genre = updated_dicts.get(self.book_choices[counter])
+                genre.append(title)
+            
+            counter += 1
+        
+        return updated_dicts
+
+
     def homepage(self):
         print("-"*49)
         print("*"  + "\t" +  "\t" + "\t" +  "\t" +  "\t" +  "\t" + "*" + "\n")

@@ -9,9 +9,14 @@ def bfs(root_node, goal):
     while path_queue:
         current_path = path_queue.pop()
         current_node = current_path[-1]
-        print("Searchin Book with title: {}".format(current_node.value[0]))
-        if current_node.value == goal:
-            return current_path 
+       #print("Searchin Book with title: {}".format(current_node.value[0]))
+        if type(current_node.value) == list:
+            titles = current_node.value 
+            title = titles[0]
+            if title == goal:
+                return current_path 
+            else:
+                continue 
         else:
             for child in current_node.children:
                 new_path = current_path[:]

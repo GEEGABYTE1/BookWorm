@@ -2,6 +2,7 @@ from Tree import*
 import time
 from hashmap import HashMap
 from data import dictionaries
+from bfs import bfs
 
 class Running:
     book_database = HashMap(1000)
@@ -31,6 +32,7 @@ class Running:
             if prompt == "/view_genre":
                 prompted_genre = input("What genre of books would you like to view: ")
                 prompted_genre = prompted_genre.title()
+                prompted_genre = prompted_genre.strip(" ")
                 if not prompted_genre in self.book_choices:
                     self.error()
                 else:
@@ -42,8 +44,42 @@ class Running:
             elif prompt == "/search_title":
                 prompted_title = str(input("Please enter a title of a book you would like to search for: "))
                 prompted_title = prompted_title.title()
-                formatted_dictionary = self.genre_title()
-            
+                prompted_title = prompted_title.strip(" ")
+                formatted_trees = self.genre_title()[1]
+                formatted_dictionary = self.genre_title()[0]
+                corres_genre = None
+                for genre, titles in formatted_dictionary.items():
+                    for title in titles:
+                        if prompted_title in title:
+                            corres_genre = genre 
+                            break 
+                        else:
+                            continue 
+                    if corres_genre == None:
+                        continue 
+                    else:
+                        break
+                
+                if corres_genre == None:
+                    time.sleep(0.5)
+                    print("Sorry, that title does not seem to be in our program!")
+                else:
+                    corres_genre = corres_genre.title()
+                    root_node = None
+                    for tree in formatted_trees:
+                        if tree.value == corres_genre:
+                            root_node = tree
+                            break
+
+                    title_path = bfs(root_node, prompted_title)
+                    desired_result = title_path[-1].value 
+                    print("Title: {}".format(desired_result[0]))
+                    print("Genre: {}".format(corres_genre))
+                    print("Price: {}".format(desired_result[-1]))
+
+
+
+
             elif prompt == "/search_author":
                 prompted_author = str(input("Please enter a name of an author you would like to search: "))
                 prompted_author = prompted_author.title()
@@ -55,13 +91,20 @@ class Running:
             updated_dicts[genre] = []
         
         for dictionary in dictionaries:
-            for title in dictionary.keys():
+            for title, info in dictionary.items():
                 genre = updated_dicts.get(self.book_choices[counter])
-                genre.append(title)
+                genre.append([title, info[-1]])
             
             counter += 1
         
+        trees = []
+        for genre, titles in updated_dicts.items():
+            root_node = TreeNode(genre)
+            for title in titles:
+                root_node.add_child(TreeNode(title))
+            trees.append(root_node)
         
+        return updated_dicts,trees
 
 
     def homepage(self):

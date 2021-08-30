@@ -61,7 +61,7 @@ class Running:
             
             counter += 1
         
-        return updated_dicts
+        
 
 
     def homepage(self):

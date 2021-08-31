@@ -106,9 +106,36 @@ class Running:
                         print("Title: {}".format(title_name))
                         print("Price: ${}".format(title_price))
 
-    def author_title(self):
+            elif prompt == "/search_price":
+                prompted_price = int(input("Please enter a price you would like to search by: "))
+                price_tree = self.price_title()
+                root_node = self.price_title()
+
+    def price_title(self):
         updated_dicts = {}
         counter = 0 
+        for dictionary in dictionaries:
+            for title, book_info in dictionary.items():
+                price = book_info[-1]
+                price_status = updated_dicts.get(price, None)
+                if price_status == None:
+                    genre = self.book_choices[counter]
+                    updated_dicts[price] = [[title, book_info[0], genre]]
+                else:
+                    updated_dicts[price].append([title, price])
+            counter += 1
+
+            price_tree = TreeNode("Prices")
+            for price, book_info in updated_dicts.items():
+                combined_tree_info  = (price, book_info)
+                temp_tree_node = TreeNode(combined_tree_info)
+                price_tree.add_child(temp_tree_node)
+            
+            return price_tree
+        
+
+    def author_title(self):
+        updated_dicts = {}
         for dictionary in dictionaries:
             for title, book_info in dictionary.items():
                 author_name = book_info[0]

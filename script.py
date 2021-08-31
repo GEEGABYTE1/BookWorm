@@ -112,7 +112,27 @@ class Running:
                 price_tree = self.price_title()
                 root_node = self.price_title()
                 search_result = bfs_price(root_node, prompted_price)
-                
+                if search_result == None:
+                    print("Oops, there is no book under the price you have listed yet! ")
+                else:
+                    price = search_result[-1].value[0]
+                    books_info = search_result[-1].value[-1]
+                    
+                    print("\n")
+                    print("-"*24)
+                    print("Price: ${}".format(price))
+                    for book in books_info:
+                        print("-"*24)
+                        print("Title: {}".format(book[0]))
+                        print("Author: {}".format(book[1]))
+                        print("Genre: {}".format(book[-1]))
+                        
+                    
+            
+
+
+
+
 
     def price_title(self):
         updated_dicts = {}
@@ -125,16 +145,16 @@ class Running:
                     genre = self.book_choices[counter]
                     updated_dicts[price] = [[title, book_info[0], genre]]
                 else:
-                    updated_dicts[price].append([title, price])
+                    updated_dicts[price].append([title, book_info[0], price])
             counter += 1
 
-            price_tree = TreeNode("Prices")
-            for price, book_info in updated_dicts.items():
-                combined_tree_info  = (price, book_info)
-                temp_tree_node = TreeNode(combined_tree_info)
-                price_tree.add_child(temp_tree_node)
-            
-            return price_tree
+        price_tree = TreeNode("Prices")
+        for price, book_info in updated_dicts.items():
+            combined_tree_info  = (price, book_info)
+            temp_tree_node = TreeNode(combined_tree_info)
+            price_tree.add_child(temp_tree_node)
+        
+        return price_tree
         
 
     def author_title(self):

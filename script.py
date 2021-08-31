@@ -4,6 +4,7 @@ from hashmap import HashMap
 from data import dictionaries
 from bfs import bfs
 from bfs_author import bfs_author
+from bfs_price import bfs_price
 
 class Running:
     book_database = HashMap(1000)
@@ -110,6 +111,8 @@ class Running:
                 prompted_price = int(input("Please enter a price you would like to search by: "))
                 price_tree = self.price_title()
                 root_node = self.price_title()
+                search_result = bfs_price(root_node, prompted_price)
+                
 
     def price_title(self):
         updated_dicts = {}

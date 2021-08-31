@@ -77,13 +77,35 @@ class Running:
                     print("Genre: {}".format(corres_genre))
                     print("Author: {}".format(desired_result[1]))
                     print("Price: {}".format(desired_result[-1]))
-
-
+            
 
             elif prompt == "/search_author":
                 prompted_author = str(input("Please enter a name of an author you would like to search: "))
                 prompted_author = prompted_author.title()
                 prompted_author = prompted_author.strip(" ")
+                author_dict_formatting = self.author_title()
+
+
+    def author_title(self):
+        updated_dicts = {}
+        counter = 0 
+        for dictionary in dictionaries:
+            for title, book_info in dictionary.items():
+                author_name = book_info[0]
+                author_status = updated_dicts.get(author_name, None)
+                if author_status == None:
+                    updated_dicts[author_name] = [title]
+                else:
+                    updated_dicts[author_name].append(title)
+        
+        author_tree = TreeNode("Authors")
+        for author, title in updated_dicts:
+            combined_author_info = (author, title)
+            temp_tree_node = TreeNode(combined_author_info)
+            author_tree.add_child(temp_tree_node)
+        
+        return author_tree
+        
     
     def genre_title(self):
         updated_dicts = {}

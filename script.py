@@ -75,6 +75,7 @@ class Running:
                     desired_result = title_path[-1].value 
                     print("Title: {}".format(desired_result[0]))
                     print("Genre: {}".format(corres_genre))
+                    print("Author: {}".format(desired_result[1]))
                     print("Price: {}".format(desired_result[-1]))
 
 
@@ -93,7 +94,7 @@ class Running:
         for dictionary in dictionaries:
             for title, info in dictionary.items():
                 genre = updated_dicts.get(self.book_choices[counter])
-                genre.append([title, info[-1]])
+                genre.append([title, info[0], info[-1]])
             
             counter += 1
         

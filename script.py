@@ -85,7 +85,7 @@ class Running:
                 prompted_author = prompted_author.title()
                 prompted_author = prompted_author.strip(" ")
                 author_tree = self.author_title()
-                author_tree_root_node = self.author_title().value
+                author_tree_root_node = self.author_title()
                 author_search = bfs_author(author_tree_root_node, prompted_author)
 
 
@@ -103,7 +103,7 @@ class Running:
                     updated_dicts[author_name].append([title, price])
         
         author_tree = TreeNode("Authors")
-        for author, title in updated_dicts:
+        for author, title in updated_dicts.items():
             combined_author_info = (author, title)
             temp_tree_node = TreeNode(combined_author_info)
             author_tree.add_child(temp_tree_node)

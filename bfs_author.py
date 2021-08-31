@@ -9,11 +9,14 @@ def bfs_author(root_node, goal):
     while path_queue:
         current_path = path_queue.pop()
         current_node = current_path[-1]
-        if current_node.value[0] == goal:
-            return current_path 
+        if type(current_node.value) == str:
+            pass
         else:
-            for child in current_node.children:
-                new_path = current_path[:]
-                new_path.append(child)
-                path_queue.appendleft(new_path)
+            if current_node.value[0] == goal:
+                return current_path 
+            
+        for child in current_node.children:
+            new_path = current_path[:]
+            new_path.append(child)
+            path_queue.appendleft(new_path)
 

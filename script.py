@@ -127,13 +127,6 @@ class Running:
                         print("Author: {}".format(book[1]))
                         print("Genre: {}".format(book[-1]))
                         
-                    
-            
-
-
-
-
-
     def price_title(self):
         updated_dicts = {}
         counter = 0 

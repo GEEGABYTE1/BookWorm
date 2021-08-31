@@ -3,6 +3,7 @@ import time
 from hashmap import HashMap
 from data import dictionaries
 from bfs import bfs
+from bfs_author import bfs_author
 
 class Running:
     book_database = HashMap(1000)
@@ -83,7 +84,9 @@ class Running:
                 prompted_author = str(input("Please enter a name of an author you would like to search: "))
                 prompted_author = prompted_author.title()
                 prompted_author = prompted_author.strip(" ")
-                author_dict_formatting = self.author_title()
+                author_tree = self.author_title()
+                author_tree_root_node = self.author_title().value
+                author_search = bfs_author(author_tree_root_node, prompted_author)
 
 
     def author_title(self):
@@ -92,11 +95,12 @@ class Running:
         for dictionary in dictionaries:
             for title, book_info in dictionary.items():
                 author_name = book_info[0]
+                price = book_info[-1]
                 author_status = updated_dicts.get(author_name, None)
                 if author_status == None:
-                    updated_dicts[author_name] = [title]
+                    updated_dicts[author_name] = [title, price]
                 else:
-                    updated_dicts[author_name].append(title)
+                    updated_dicts[author_name].append([title, price])
         
         author_tree = TreeNode("Authors")
         for author, title in updated_dicts:

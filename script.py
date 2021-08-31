@@ -74,6 +74,8 @@ class Running:
 
                     title_path = bfs(root_node, prompted_title)
                     desired_result = title_path[-1].value 
+                    print("\n")
+                    print("-"*24)
                     print("Title: {}".format(desired_result[0]))
                     print("Genre: {}".format(corres_genre))
                     print("Author: {}".format(desired_result[1]))
@@ -87,7 +89,22 @@ class Running:
                 author_tree = self.author_title()
                 author_tree_root_node = self.author_title()
                 author_search = bfs_author(author_tree_root_node, prompted_author)
-
+                if author_search == None:
+                    print("Oops, looks like that author is not registered on our software!")
+                else:
+                    desired_author = author_search[-1]
+                    author_name = desired_author.value[0]
+                    titles = desired_author.value[-1]
+                    time.sleep(0.3)
+                    print("\n")
+                    print("-"*24)
+                    print("Author: {}".format(author_name))
+                    for title in titles:
+                        title_name = title[0]
+                        title_price = title[-1]
+                        print("-"*24)
+                        print("Title: {}".format(title_name))
+                        print("Price: ${}".format(title_price))
 
     def author_title(self):
         updated_dicts = {}
@@ -98,7 +115,7 @@ class Running:
                 price = book_info[-1]
                 author_status = updated_dicts.get(author_name, None)
                 if author_status == None:
-                    updated_dicts[author_name] = [title, price]
+                    updated_dicts[author_name] = [[title, price]]
                 else:
                     updated_dicts[author_name].append([title, price])
         

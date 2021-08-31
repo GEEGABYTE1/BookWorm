@@ -6,7 +6,7 @@ def bfs_price(root_node, goal):
     initial_path = [root_node]
     path_queue.appendleft(initial_path)
     while path_queue:
-        current_path = path_qeue.pop()
+        current_path = path_queue.pop()
         current_node = current_path[-1]
         if type(current_node.value) == str:
             pass 

@@ -6,6 +6,7 @@ from bfs import bfs
 from bfs_author import bfs_author
 from bfs_price import bfs_price
 from double_ll import DoubleLinkedList
+from quicksort import quicksort
 
 class Running:
     book_database = HashMap(1000)
@@ -126,8 +127,8 @@ class Running:
 
             elif prompt == "/search_price":
                 prompted_price = int(input("Please enter a price you would like to search by: "))
-                price_tree = self.price_title()
-                root_node = self.price_title()
+                price_tree = self.price_title()[0]
+                root_node = self.price_title()[0]
                 search_result = bfs_price(root_node, prompted_price)
                 if search_result == None:
                     print("Oops, there is no book under the price you have listed yet! ")
@@ -149,7 +150,38 @@ class Running:
                         print("Genre: {}".format(book[-1]))
                         info_lst.append(book[-1])
                         self.bookshelf_prompt(info_lst)
+            
+            elif prompt == "/search_by_highest" or prompt == "/search_by_lowest:":
+                price_dict = self.price_title()[-1]
+                prices = list(price_dict.keys())
+                if prompt == "/search_by_lowest":
+                    sorted_prices = quicksort(prices, 0, len(prices) - 1)
+                else:
+                    sorted_prices = quicksort(prices, 0, len(prices) - 1)
+                    reversed_merge = []
+                    for i in range(-1, len(sorted_prices) * -1, -1):
+                        reversed_merge.append(sorted_prices[i])
 
+                    sorted_prices = reversed_merge
+                    
+
+                for price in sorted_prices:
+                    corresponding_book = price_dict.get(price)
+                    for book in corresponding_book:
+                        info_lst = []
+                        print("-"*24)
+                        print("Title: {}".format(book[0]))
+                        info_lst.append(book[0])
+                        print("Author: {}".format(book[1]))
+                        info_lst.append(book[1])
+                        print("Genre: {}".format(book[-1]))
+                        info_lst.append(book[-1])
+                        print("Price: {}".format(price))
+                        info_lst.append(price)
+                        self.bookshelf_prompt(info_lst)
+
+
+        
             elif prompt == "/view_bookshelf":
                 self.bookshelf.stringify_list()
 
@@ -190,7 +222,7 @@ class Running:
                     genre = self.book_choices[counter]
                     updated_dicts[price] = [[title, book_info[0], genre]]
                 else:
-                    updated_dicts[price].append([title, book_info[0], price])
+                    updated_dicts[price].append([title, book_info[0], genre])
             counter += 1
 
         price_tree = TreeNode("Prices")
@@ -199,7 +231,9 @@ class Running:
             temp_tree_node = TreeNode(combined_tree_info)
             price_tree.add_child(temp_tree_node)
         
-        return price_tree
+        
+        
+        return (price_tree, updated_dicts)
         
 
     def author_title(self):

@@ -4,3 +4,20 @@ physics = {'Ignition! An Informal History of Liquid Rocket Propellants'.title():
 
 
 dictionaries = [math, com_sci, physics]
+
+genres = ["Math", "Computer Science", "Physics"]
+
+titles = []
+
+for dictionary in dictionaries:
+    for title in dictionary.keys():
+        titles.append(title)
+
+authors = []
+prices = []
+for dictionary in dictionaries:
+    for author, price in dictionary.values():
+        authors.append(author)
+        prices.append(price)
+
+

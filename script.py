@@ -5,9 +5,11 @@ from data import dictionaries
 from bfs import bfs
 from bfs_author import bfs_author
 from bfs_price import bfs_price
+from double_ll import DoubleLinkedList
 
 class Running:
     book_database = HashMap(1000)
+    bookshelf = DoubleLinkedList()
     book_database.setter("Math", math_tree)
     book_database.setter("Computer Science", com_sci_tree)
     book_database.setter("Physics", physics_tree)

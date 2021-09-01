@@ -126,6 +126,9 @@ class Running:
                         print("Title: {}".format(book[0]))
                         print("Author: {}".format(book[1]))
                         print("Genre: {}".format(book[-1]))
+            
+            else:
+                print("That command seems to be invalid!")
                         
     def price_title(self):
         updated_dicts = {}

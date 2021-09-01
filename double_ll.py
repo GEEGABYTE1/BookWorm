@@ -85,12 +85,17 @@ class DoubleLinkedList:
         node_to_remove = None 
         current_node = self.get_head_node()
         while current_node:
-            if current_node.get_value() == value:
-                node_to_remove = current_node 
+            for info in current_node.get_value():
+                if info == value:
+                    node_to_remove = current_node
+                    break 
+            if node_to_remove != None:
                 break 
-            current_node = current_node.get_link()
+            else:
+                current_node = current_node.get_link()
         
         if node_to_remove == None:
+            print("The info you have entered does not seem to match any book in your bookshelf! ")
             return None 
         elif node_to_remove == self.head_node:
             self.remove_head()
@@ -103,6 +108,7 @@ class DoubleLinkedList:
             next_node.set_prev_link(prev_node)
             prev_node.set_link(next_node)
         
+        print("Book Succesfully Removed from your Bookshelf!")
         return node_to_remove 
 
     def stringify_list(self):
@@ -111,10 +117,11 @@ class DoubleLinkedList:
             print("There is nothing to look at in your bookshelf as it is empty! ")
         else:
             while current_node:
+                print("-"*24)
                 if current_node.get_value() != None:
                     for i in current_node.get_value():
                         if i in genres:
-                            print("Genre: {i}".format(i))
+                            print("Genre: {i}".format(i=i))
                         elif i in titles:
                             print("Title: {}".format(i))
                         elif i in authors:
@@ -122,6 +129,6 @@ class DoubleLinkedList:
                         elif i in prices:
                             print("Price: ${i}".format(i=i))
                         
-                    print("-"*24)
+                    
                 current_node = current_node.get_link()
     

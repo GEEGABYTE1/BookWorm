@@ -77,12 +77,19 @@ class Running:
 
                     title_path = bfs(root_node, prompted_title)
                     desired_result = title_path[-1].value 
+                    info_lst = []
                     print("\n")
                     print("-"*24)
                     print("Title: {}".format(desired_result[0]))
+                    info_lst.append(desired_result[0])
                     print("Genre: {}".format(corres_genre))
+                    info_lst.append(corres_genre)
                     print("Author: {}".format(desired_result[1]))
+                    info_lst.append(desired_result[1])
                     print("Price: {}".format(desired_result[-1]))
+                    info_lst.append(desired_result[-1])
+                
+                    self.bookshelf_prompt(info_lst)
             
 
             elif prompt == "/search_author":
@@ -101,13 +108,21 @@ class Running:
                     time.sleep(0.3)
                     print("\n")
                     print("-"*24)
+                    
                     print("Author: {}".format(author_name))
                     for title in titles:
+                        info_lst = []
                         title_name = title[0]
                         title_price = title[-1]
-                        print("-"*24)
                         print("Title: {}".format(title_name))
+                        info_lst.append(title_name)
                         print("Price: ${}".format(title_price))
+                        info_lst.append(title_price)
+                        info_lst.append(prompted_author)
+                        print("-"*24)
+                    
+                        self.bookshelf_prompt(info_lst)
+                    
 
             elif prompt == "/search_price":
                 prompted_price = int(input("Please enter a price you would like to search by: "))
@@ -120,17 +135,47 @@ class Running:
                     price = search_result[-1].value[0]
                     books_info = search_result[-1].value[-1]
                     
+                    
                     print("\n")
                     print("-"*24)
                     print("Price: ${}".format(price))
                     for book in books_info:
+                        info_lst = []
                         print("-"*24)
                         print("Title: {}".format(book[0]))
+                        info_lst.append(book[0])
                         print("Author: {}".format(book[1]))
+                        info_lst.append(book[1])
                         print("Genre: {}".format(book[-1]))
+                        info_lst.append(book[-1])
+                        self.bookshelf_prompt(info_lst)
+
+            elif prompt == "/view_bookshelf":
+                self.bookshelf.stringify_list()
+
+                    
+                    
+                    
             
             else:
                 print("That command seems to be invalid!")
+
+    def bookshelf_prompt(self, info_lst):
+        running = True 
+        while running:
+            prompt2 = str(input("Would you like to add this to your bookshelf? (type yes/no): "))
+            if prompt2 == "yes" or prompt2 == "yes ":
+                self.bookshelf.add_to_tail(info_lst)
+                print("Book added! ")
+                break
+            elif prompt2 == "no" or prompt2 == "no ":
+                break 
+            else:
+                print("That answer could not be understood!")
+        
+        
+
+        
                         
     def price_title(self):
         updated_dicts = {}

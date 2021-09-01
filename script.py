@@ -153,9 +153,14 @@ class Running:
             elif prompt == "/view_bookshelf":
                 self.bookshelf.stringify_list()
 
-                    
-                    
-                    
+            elif prompt == '/delete_book':
+                general_prompt = input('Please type in the author, title, or price of the book you would like to remove: ')
+                general_prompt = general_prompt.title()
+                general_prompt = general_prompt.strip(" ")
+                self.bookshelf.remove_by_value(general_prompt)
+            
+            elif prompt == "/quit":
+                break
             
             else:
                 print("That command seems to be invalid!")
@@ -172,10 +177,7 @@ class Running:
                 break 
             else:
                 print("That answer could not be understood!")
-        
-        
-
-        
+            
                         
     def price_title(self):
         updated_dicts = {}

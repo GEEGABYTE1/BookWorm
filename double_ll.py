@@ -1,3 +1,4 @@
+from data import*
 
 class Node:
     def __init__(self, value, link=None, prev_link=None):
@@ -106,8 +107,21 @@ class DoubleLinkedList:
 
     def stringify_list(self):
         current_node = self.get_head_node()
-        while current_node:
-            if current_node.get_value() != None:
-                print(current_node.get_value())
-            current_node = current_node.get_link()
+        if current_node == None:
+            print("There is nothing to look at in your bookshelf as it is empty! ")
+        else:
+            while current_node:
+                if current_node.get_value() != None:
+                    for i in current_node.get_value():
+                        if i in genres:
+                            print("Genre: {i}".format(i))
+                        elif i in titles:
+                            print("Title: {}".format(i))
+                        elif i in authors:
+                            print("Author: {}".format(i))
+                        elif i in prices:
+                            print("Price: ${i}".format(i=i))
+                        
+                    print("-"*24)
+                current_node = current_node.get_link()
     
